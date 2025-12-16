@@ -1,13 +1,13 @@
 # Schnellstart Guide
 
-## Python Virtual Environment einrichten
+## 1. Python Virtual Environment einrichten
 
-### 1. Erstelle ein neues venv:
+### Erstelle ein neues venv:
 ```bash
 python -m venv venv
 ```
 
-### 2. Aktiviere das venv:
+### Aktiviere das venv:
 
 **Auf macOS/Linux:**
 ```bash
@@ -21,17 +21,38 @@ venv\Scripts\activate
 
 Du siehst dann `(venv)` vor deinem Terminal-Prompt.
 
-### 3. Installiere Dependencies:
+### Installiere Dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Teste lokal:
+## 2. .env Datei erstellen (für lokales Testen)
+
+### Kopiere die Vorlage:
+```bash
+cp .env.example .env
+```
+
+### Bearbeite .env und fülle aus:
+```bash
+# S3 Bucket Name (nach Schritt 1 von AWS Setup)
+S3_BUCKET_NAME=mein-logging-bucket-2024
+
+# AWS Region
+AWS_REGION=eu-central-1
+
+# API Gateway URL (nach Schritt 4 von AWS Setup)
+API_GATEWAY_URL=https://xxxxxxxxxx.execute-api.eu-central-1.amazonaws.com/prod/log
+```
+
+**Wichtig:** Die `.env` Datei ist in `.gitignore` und wird NICHT commited!
+
+## 3. Teste lokal:
 ```bash
 python test_lambda.py
 ```
 
-### 5. Deaktiviere venv (wenn fertig):
+## 4. Deaktiviere venv (wenn fertig):
 ```bash
 deactivate
 ```

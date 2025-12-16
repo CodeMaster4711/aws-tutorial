@@ -8,7 +8,7 @@ s3_client = boto3.client('s3')
 
 # S3 Bucket Name (wird als Umgebungsvariable gesetzt)
 import os
-BUCKET_NAME = os.environ.get('S3_BUCKET_NAME', 'your-bucket-name')
+BUCKET_NAME = os.environ.get('S3_BUCKET_NAME', 'logging-tutorial-bucket')
 
 
 def lambda_handler(event, context):

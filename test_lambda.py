@@ -8,8 +8,16 @@ Du kannst es auch verwenden, um die Live-API zu testen.
 
 import json
 import sys
+import os
 import requests
 from datetime import datetime
+
+# Lade .env Datei falls vorhanden
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # python-dotenv nicht installiert, verwende OS Umgebungsvariablen
 
 
 def test_local():
@@ -131,17 +139,31 @@ def main():
         api_url = sys.argv[1]
         test_api(api_url)
     else:
-        # Kein Argument - teste lokal
-        print("Verwendung:")
-        print("  Lokal testen:     python test_lambda.py")
-        print("  Live API testen:  python test_lambda.py https://your-api-url/prod/log")
-        print()
+        # Prüfe ob .env existiert und API_GATEWAY_URL gesetzt ist
+        api_url_from_env = os.getenv('API_GATEWAY_URL')
 
-        user_input = input("Möchtest du die Lambda-Funktion lokal testen? (j/n): ")
-        if user_input.lower() in ['j', 'ja', 'y', 'yes']:
-            test_local()
+        if api_url_from_env:
+            print(f"📋 API URL aus .env gefunden: {api_url_from_env}\n")
+            choice = input("Möchtest du (1) Live API oder (2) Lokal testen? (1/2): ")
+            if choice == "1":
+                test_api(api_url_from_env)
+            elif choice == "2":
+                test_local()
+            else:
+                print("\nAbgebrochen.")
         else:
-            print("\nAbgebrochen.")
+            # Kein Argument - teste lokal
+            print("Verwendung:")
+            print("  Lokal testen:     python test_lambda.py")
+            print("  Live API testen:  python test_lambda.py https://your-api-url/prod/log")
+            print("  Oder setze API_GATEWAY_URL in .env Datei")
+            print()
+
+            user_input = input("Möchtest du die Lambda-Funktion lokal testen? (j/n): ")
+            if user_input.lower() in ['j', 'ja', 'y', 'yes']:
+                test_local()
+            else:
+                print("\nAbgebrochen.")
 
     print("\n" + "="*60 + "\n")
 
