@@ -1,0 +1,27 @@
+# Terraform State Files
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Terraform Lock File
+.terraform.lock.hcl
+
+# Terraform Directory
+.terraform/
+
+# Variable Files (können Secrets enthalten)
+terraform.tfvars
+*.auto.tfvars
+
+# Lambda ZIP (wird automatisch generiert)
+lambda_function.zip
+
+# Crash Logs
+crash.log
+crash.*.log
+
+# Override Files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json

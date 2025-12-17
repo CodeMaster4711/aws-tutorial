@@ -1,0 +1,17 @@
+# AWS Region
+aws_region = "eu-north-1"
+
+# S3 Bucket Name (muss global eindeutig sein!)
+bucket_name = "logging-tutorial-bucket-tf"
+
+# Projekt-Name
+project_name = "logging-system"
+
+# Umgebung
+environment = "dev"
+
+# Lambda Function Name
+lambda_function_name = "TrafficLoggingFunction"
+
+# API Gateway Stage
+api_stage_name = "prod"
